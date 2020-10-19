@@ -10,8 +10,11 @@ const initialState = [
         user: '0',
         reactions: {
             thumbsUp: 0,
-            hooray: 2,
-        }
+            hooray: 0,
+            heart: 0,
+            rocket: 0,
+            eyes: 0,
+        },
     },
     {
         id: '2',
@@ -20,9 +23,12 @@ const initialState = [
         date: sub(new Date(),{minutes: 5}).toISOString(),
         user: '1',
         reactions: {
-            thumbsUp: 1,
-            hooray: 3,
-        }
+            thumbsUp: 0,
+            hooray: 0,
+            heart: 0,
+            rocket: 0,
+            eyes: 0,
+        },
     }
 ]
 
@@ -41,7 +47,14 @@ const postsSlice = createSlice({
                         date: new Date().toISOString(),
                         title,
                         content,
-                        user: userId
+                        user: userId,
+                        reactions: {
+                            thumbsUp: 0,
+                            hooray: 0,
+                            heart: 0,
+                            rocket: 0,
+                            eyes: 0,
+                        },
                     }
                 }
             }
@@ -58,11 +71,7 @@ const postsSlice = createSlice({
             const {postId, reaction} = action.payload
             const existingPost = state.find(post => post.id === postId)
             if (existingPost){
-                if (existingPost.reactions[reaction] === undefined) {
-                    existingPost.reactions[reaction] = 1
-                }else{
-                    existingPost.reactions[reaction]++
-                }
+                existingPost.reactions[reaction]++
             }
         }
     }
