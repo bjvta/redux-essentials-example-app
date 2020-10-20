@@ -45,7 +45,7 @@ export const PostsList = () => {
     }else if (postStatus === 'succeeded') {
         const orderedPosts = posts
             .slice()
-            .sort((a, b) => b.date().localeCompare(a.date))
+            .sort((a, b) => b.date.localeCompare(a.date))
 
         content = orderedPosts.map(post => (
             <PostExcerpt key={post.id} post={post} />
